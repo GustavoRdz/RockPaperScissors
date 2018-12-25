@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock Paper scissors</title>
+</head>
+
+<body>
+    <div align="center">
+        <h1>Rock, paper, scissors game</h1> Play it!
+        <h2>See progress in console: </h2>
+        <div id="instructions">
+            <h4>Press simultaneously the following keys</h4>
+            <p> MAC: <em>option + command + j</em></p>
+            <p>Windows: <em>ctrl + shift + I</em></p>
+        </div>
+        <input id="play" type="button" value="Click here to play it!" onclick="game()">
+    </div>
+</body>
+
+</html>
+
+<script>
+    function computerPlay() {
+        var options = ['Rock', 'Paper', 'Scissors']
+        var selected = options[Math.floor(Math.random() * options.length)];
+        return selected
+    }
+
+    function playRound(playerSelection, computerSelection) {
+        switch (playerSelection.toUpperCase()) {
+            case 'ROCK':
+                switch (computerSelection.toUpperCase()) {
+                    case 'ROCK':
+                        return 'Tie'
+                    case 'PAPER':
+                        return 'Computer'
+                    case 'SCISSORS':
+                        return 'User'
+                }
+                return
+            case 'PAPER':
+                switch (computerSelection.toUpperCase()) {
+                    case 'ROCK':
+                        return 'User'
+                    case 'PAPER':
+                        return 'Tie'
+                    case 'SCISSORS':
+                        return 'Computer'
+                }
+                return
+            case 'SCISSORS':
+                switch (computerSelection.toUpperCase()) {
+                    case 'ROCK':
+                        return 'Computer'
+                    case 'PAPER':
+                        return 'User'
+                    case 'SCISSORS':
+                        return 'Tie'
+                }
+            default:
+                return 'only use ROCK, PAPER or SCISSORS'
+        }
+        return
+    }
+
+    function game() {
+        var chances = 5;
+        var Uwin = 0
+        var Cwin = 0
+        var Tie = 0
+        window.console.clear()
+
+        while (chances > 0) {
+            const playerSelection = prompt('Round :' + 1 * (6 - chances) + ' ==> Choose: Rock, paper or Scissors? :')
+            const computerSelection = computerPlay()
+            var win = playRound(playerSelection, computerSelection)
+            switch (win) {
+                case 'Tie':
+                    Tie++
+                    chances--
+                    break
+                case 'Computer':
+                    Cwin++
+                    chances--
+                    break
+                case 'User':
+                    Uwin++
+                    chances--
+                    break
+            }
+            console.log(' ');
+            console.log('==========================')
+            console.log('Round: ' + 1 * (5 - chances))
+            console.log(' ------ scores ------')
+            console.log('User: ' + Uwin)
+            console.log('Computer: ' + Cwin)
+            console.log('Ties :' + Tie)
+        }
+        console.log('')
+        console.log('');
+        if (Uwin > Cwin) {
+            console.log('==== **** ====')
+            console.log('=  YOU WIN!  =');
+            console.log('==== **** ====')
+        } else {
+            console.log('====== ***** ======')
+            console.log('=  COMPUTER WIN!  =');
+            console.log('====== ***** ======')
+        }
+    }
+</script>
+<style>
+    #play {
+        font-size: 3em;
+        height: 80px;
+        width: 450px;
+        background-color: rgba(0, 255, 0, 0.8);
+        color: brown;
+    }
+    
+    h2 {
+        background-color: #f00;
+        width: 350px;
+        height: 50px;
+        color: greenyellow;
+        text-align: center;
+        padding-top: 20px;
+    }
+    
+    #instructions {
+        margin-top: -40px;
+        width: 300px;
+        background-color: coral;
+    }
+</style>
